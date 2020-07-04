@@ -2,17 +2,15 @@
 """
 Created on Sat Jul  4 12:11:02 2020
 
-@author: ShantanuRM
+@author: Santanu
 """
 
 import cv2,time
 import numpy as np
 import os
-
-########## KNN CODE ############
-def distance(v1, v2):
-	# Eucledian 
-	return np.sqrt(((v1-v2)**2).sum())
+##KNN
+def distance(x1, x2):
+	return np.sqrt(((x1-x2)**2).sum())
 
 def knn(train, test, k=5):
 	dist = []
@@ -34,7 +32,6 @@ def knn(train, test, k=5):
 	# Find max frequency and corresponding label
 	index = np.argmax(output[1])
 	return output[0][index]
-################################
     
 ## camera
 cam = cv2.VideoCapture(0)
@@ -50,7 +47,7 @@ labels = []
 class_id = 0 # Labels for the given file
 names = {} #Mapping btw id - name
 
-# Data Preparation
+##Data Preparation
 for fx in os.listdir(d_path):
 	if fx.endswith('.npy'):
 		#Create a mapping btw class_id and name
@@ -88,7 +85,7 @@ while True:
     if len(face) == 0:
         continue
     
-    ##pic the last face from sorted array
+    ##pick the last face from sorted array
     face = sorted(face,key=lambda f:f[2]*f[3])
     
     ##as last face will be the one which is closer
@@ -101,7 +98,6 @@ while True:
         face_region_of_interest = cv2.resize(face_region_of_interest, (200,200))
         
         ##Predicted Label (out)
-		
         out = knn(trainset, face_region_of_interest.flatten())
 		
         ##Display on the screen the name and rectangle around it
