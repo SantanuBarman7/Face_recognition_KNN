@@ -2,7 +2,7 @@
 """
 Created on Sat Jul  4 11:12:03 2020
 
-@author: ShantanuRM
+@author: Santanu
 """
 
 import cv2, time
@@ -42,7 +42,7 @@ while True:
         x,y,w,h = last_face
         cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 3)
         ##store a more featured image
-        crop = 10
+        crop = 20
         face_region_of_interest = frame[y-crop:y+h+crop, x-crop:x+w+crop]
         face_region_of_interest = cv2.resize(face_region_of_interest, (200,200))
         
@@ -50,7 +50,7 @@ while True:
         
         skip += 1
         
-        if skip % 10 == 0:
+        if skip % 20 == 0:
             face_data_file.append(face_region_of_interest)
 			#print(len(face_data_file))
     cv2.imshow("webcam", frame)
